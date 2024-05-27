@@ -1,0 +1,30 @@
+---
+
+**Step 1 – Import the text file/article:**
+First, we will import the text file or article that will be used for MCQ generation with the help of the open and read functions.
+
+**Step 2 – Extraction of important words (keywords):**
+In this step, we aim to extract the most significant words, also known as keywords, from our text article, which will result in quality questions. These keywords will serve as the correct answers in the MCQs, with the other three options being distractors. For this purpose, we utilize the Rapid Automatic Keyword Extraction (RAKE) algorithm. RAKE is an efficient method for extracting keywords from individual documents by identifying frequently occurring word sequences that carry meaningful information. It analyzes word frequency and co-occurrence to identify the top 25 keyphrases or keywords from the text.
+
+**Step 3 – Split the article into sentences:**
+To facilitate easier access to the article, we split the entire document into an array or list of sentences. This process, known as sentence tokenization, also helps in easily locating sentences related to the keywords. During this step, we also filter out sentences shorter than 15 words to ensure that the resulting questions have enough context for understanding.
+
+**Step 4 – Map the sentences to the keywords:**
+After extracting the important keywords and splitting the sentences, we map the sentences containing the keywords to those keywords. This step ensures that when we generate questions from the keywords, these sentences will serve as the question with a blank for the answer. We also sort the sentences in descending order of their lengths to select the most informative sentence for question generation.
+
+**Step 5 – Generate sense of the keywords:**
+The term "sense" refers to the different meanings a single English word might have. For example, the word "fly" can refer to aviation or an insect. The sentences “A plane is about to fly” and “I killed a fly” illustrate the different senses of the word. To address this, we utilize Google's sense support to determine the appropriate sense of each keyword.
+
+**Step 6 – Generate distractors from Wordnet:**
+Distractors are the incorrect options in our MCQs that distract the quiz taker from the correct answer. These distractors should have the same sense as the keyword to maintain the question's difficulty. We extract the sense of the word, obtain its hypernym (superclass), and then find the hyponyms (subcategories) of that hypernym. These hyponyms, sharing the same sense as the keyword, serve as effective distractors.
+
+**Step 7 – Generate distractors from Conceptnet:**
+We use Conceptnet as a supplementary method when Wordnet fails to generate suitable distractors. Conceptnet is an online API that helps us find distractors, though they might not always be in the best sense. We prioritize Wordnet and resort to Conceptnet if necessary. Conceptnet is accessed via an online API, and its object is created within our program to find the best distractors for our keywords.
+
+**Step 8 – Map the distractors to the keywords:**
+After creating the distractors, our next task is to map them to the keywords. This step checks if the sense is available and determines whether to use the Wordnet or Conceptnet approach.
+
+**Step 9 – Present our MCQs:**
+In the final step, we format and present the questions along with their options in a clear and readable manner. We convert each sentence into a regular expression, replace the keyword with a blank, and print it with the question number and the four options.
+
+Our approach, while functional, was developed under time constraints. We recognize several areas for improvement and have documented these in our 'Room for Improvement' file. Additionally, we have included sample articles in the repository to demonstrate the project's workflow. We look forward to further refining and enhancing this project.
